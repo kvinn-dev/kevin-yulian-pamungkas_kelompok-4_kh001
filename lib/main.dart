@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-
+import 'constants/colors.dart';
 import 'theme/app_theme.dart';
 import 'widgets/app_button.dart';
 
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Design System Demo'),
+        title: const Text('Demo Aplikasi Kevin'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -36,24 +36,29 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Universitas Esa Unggul',
+              'Kevin Yulian Pamungkas',
               style: TextStyle(
+                color: AppColors.textPrimary,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 12),
             const Text(
-              'Tekan tombol di bawah untuk melihat lokasi kampus.',
+              'Tekan tombol di bawah untuk melihat akun github saya.',
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 16,
+              ),
             ),
             const SizedBox(height: 24),
 
-            // Tombol untuk membuka Google Maps
+            // Tombol untuk membuka Github
             AppButton(
-              label: 'Buka Google Maps',
-              icon: Icons.location_on,
+              label: 'Buka Github Saya',
+              icon: Icons.code,
               url:
-                  'https://maps.app.goo.gl/j7xrWZgpYSE92jeb8',
+                  'https://github.com/kvinn-dev',
             ),
 
             const SizedBox(height: 16),

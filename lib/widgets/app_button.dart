@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import '../constants/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppButton extends StatelessWidget {
@@ -33,11 +33,8 @@ class AppButton extends StatelessWidget {
       );
 
       if (!success && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Gagal membuka URL.'),
-          ),
-        );
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Gagal membuka URL.')));
       }
     }
   }
@@ -51,10 +48,9 @@ class AppButton extends StatelessWidget {
         icon: Icon(icon),
         label: Text(label),
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
+          backgroundColor: AppColors.primary, // Warna latar tombol
+          foregroundColor: AppColors.textPrimary, // Warna teks tombol
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

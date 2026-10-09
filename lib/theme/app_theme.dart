@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import '../constants/colors.dart';
 
 class AppTheme {
   static final ThemeData light = ThemeData(
@@ -11,6 +12,6 @@ class AppTheme {
     ),
 
     // Warna latar belakang
-    scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+    scaffoldBackgroundColor: AppColors.background,
   );
 }
