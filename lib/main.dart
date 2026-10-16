@@ -131,10 +131,20 @@ class _HomePageState extends State<HomePage> {
       controller: controller,
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
+      style: const TextStyle(color: Colors.black87), // teks yang diketik
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: Icon(icon),
+        labelStyle: const TextStyle(color: Colors.black54),
+        prefixIcon: Icon(icon, color: Colors.black54),
+        filled: true,
+        fillColor: Colors.white, // <-- background field jadi terang
         border: const OutlineInputBorder(),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.black26),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary, width: 2),
+        ),
       ),
       validator: (value) {
         if (value == null || value.trim().isEmpty) {
@@ -214,10 +224,28 @@ class _HomePageState extends State<HomePage> {
 
                 DropdownButtonFormField<String>(
                   initialValue: _statusKehadiran,
+                  dropdownColor:
+                      Colors.white, // <-- penting! biar menu dropdown ga gelap
+                  style: const TextStyle(color: Colors.black87),
                   decoration: const InputDecoration(
                     labelText: 'Keterangan Kehadiran',
-                    prefixIcon: Icon(Icons.event_available_outlined),
+                    labelStyle: TextStyle(color: Colors.black54),
+                    prefixIcon: Icon(
+                      Icons.event_available_outlined,
+                      color: Colors.black54,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
                     border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black26),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.primary,
+                        width: 2,
+                      ),
+                    ),
                   ),
                   items: const [
                     DropdownMenuItem(value: 'Hadir', child: Text('Hadir')),
@@ -228,12 +256,6 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       _statusKehadiran = value;
                     });
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Keterangan kehadiran wajib dipilih';
-                    }
-                    return null;
                   },
                 ),
 
