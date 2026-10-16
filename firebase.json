@@ -1,0 +1,30 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "praktikum-pemmob",
+          "appId": "1:961883769025:android:9beecd1fd56abdf1b2ac40",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "praktikum-pemmob",
+          "appId": "1:961883769025:ios:bdff30ac57f940d9b2ac40",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "praktikum-pemmob",
+          "configurations": {
+            "android": "1:961883769025:android:9beecd1fd56abdf1b2ac40",
+            "ios": "1:961883769025:ios:bdff30ac57f940d9b2ac40"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,17 @@
-
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'constants/colors.dart';
 import 'theme/app_theme.dart';
 import 'widgets/app_button.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
@@ -21,65 +28,248 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _nimController = TextEditingController();
+  final TextEditingController _lokasiController = TextEditingController();
+  final TextEditingController _mataKuliahController = TextEditingController();
+
+  String? _statusKehadiran = 'Hadir';
+  bool _isSaving = false;
+
+  // Menyimpan data input ke Firebase Cloud Firestore
+  Future<void> simpanData() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    setState(() {
+      _isSaving = true;
+    });
+
+    try {
+      await FirebaseFirestore.instance.collection('praktikum').add({
+        'nama': _namaController.text.trim(),
+        'nim': _nimController.text.trim(),
+        'lokasi': _lokasiController.text.trim(),
+        'mata_kuliah': _mataKuliahController.text.trim(),
+        'status': _statusKehadiran,
+        'waktu': FieldValue.serverTimestamp(),
+      });
+
+      if (!mounted) return;
+
+      // Kosongkan form setelah data berhasil disimpan
+      _formKey.currentState!.reset();
+      _namaController.clear();
+      _nimController.clear();
+      _lokasiController.clear();
+      _mataKuliahController.clear();
+
+      setState(() {
+        _statusKehadiran = 'Hadir';
+      });
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text('Data berhasil disimpan ke Firebase!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+    } catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Gagal menyimpan data. Periksa koneksi dan konfigurasi Firebase.',
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
+
+      debugPrint('Error Firebase: $e');
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _namaController.dispose();
+    _nimController.dispose();
+    _lokasiController.dispose();
+    _mataKuliahController.dispose();
+    super.dispose();
+  }
+
+  // Widget untuk membuat field input dengan validasi
+  Widget _buildTextField({
+    required String label,
+    required TextEditingController controller,
+    required IconData icon,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(icon),
+        border: const OutlineInputBorder(),
+      ),
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return '$label wajib diisi';
+        }
+        return null;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Demo Aplikasi Kevin'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Kevin Yulian Pamungkas',
-              style: TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Tekan tombol di bawah untuk melihat akun github saya.',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 16,
-              ),
-            ),
-            const SizedBox(height: 24),
+      appBar: AppBar(title: const Text('Demo Aplikasi Kevin')),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Form Input Data Praktikum',
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
 
-            // Tombol untuk membuka Github
-            AppButton(
-              label: 'Buka Github Saya',
-              icon: Icons.code,
-              url:
-                  'https://github.com/kvinn-dev',
-            ),
+                const SizedBox(height: 8),
 
-            const SizedBox(height: 16),
+                const Text(
+                  'Isi data mahasiswa dan keterangan kehadiran '
+                  'untuk menyimpan data ke Firebase.',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 14,
+                  ),
+                ),
 
-            // Tombol untuk menguji aksi internal
-            AppButton(
-              label: 'Tes Tombol',
-              icon: Icons.touch_app,
-              onPressed: () {
-                debugPrint('Tombol berhasil ditekan!');
+                const SizedBox(height: 24),
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Tombol berhasil ditekan!',
+                _buildTextField(
+                  label: 'Nama',
+                  controller: _namaController,
+                  icon: Icons.person_outline,
+                ),
+
+                const SizedBox(height: 16),
+
+                _buildTextField(
+                  label: 'NIM',
+                  controller: _nimController,
+                  icon: Icons.badge_outlined,
+                  keyboardType: TextInputType.number,
+                ),
+
+                const SizedBox(height: 16),
+
+                _buildTextField(
+                  label: 'Lokasi',
+                  controller: _lokasiController,
+                  icon: Icons.location_on_outlined,
+                ),
+
+                const SizedBox(height: 16),
+
+                _buildTextField(
+                  label: 'Mata Kuliah',
+                  controller: _mataKuliahController,
+                  icon: Icons.menu_book_outlined,
+                ),
+
+                const SizedBox(height: 16),
+
+                DropdownButtonFormField<String>(
+                  initialValue: _statusKehadiran,
+                  decoration: const InputDecoration(
+                    labelText: 'Keterangan Kehadiran',
+                    prefixIcon: Icon(Icons.event_available_outlined),
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'Hadir', child: Text('Hadir')),
+                    DropdownMenuItem(value: 'Izin', child: Text('Izin')),
+                    DropdownMenuItem(value: 'Sakit', child: Text('Sakit')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _statusKehadiran = value;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Keterangan kehadiran wajib dipilih';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 24),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: _isSaving ? null : simpanData,
+                    icon: _isSaving
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.cloud_upload_outlined),
+                    label: Text(_isSaving ? 'Menyimpan...' : 'Simpan Data'),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
                   ),
-                );
-              },
+                ),
+
+                const SizedBox(height: 16),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: AppButton(
+                    label: 'Buka Github Saya',
+                    icon: Icons.code,
+                    url: 'https://github.com/kvinn-dev',
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "961883769025",
+    "project_id": "praktikum-pemmob",
+    "storage_bucket": "praktikum-pemmob.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961883769025:android:9beecd1fd56abdf1b2ac40",
+        "android_client_info": {
+          "package_name": "com.example.praktikum2_kevin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASa4phXGdokmKvKUzfrdpAebwPn9gXJig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
