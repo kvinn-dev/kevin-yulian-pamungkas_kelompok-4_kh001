@@ -24,12 +24,22 @@ Aplikasi berhasil mengimplementasikan pengelolaan data User dan Admin menggunaka
 ## Struktur File
 ```text
 lib/
-├── main.dart
+├── constants/
+│   └── colors.dart
+├── l10n/
+│   ├── app_en.arb
+│   ├── app_id.arb
+│   └── ...
 ├── models/
-│   ├── user.dart
-│   └── admin.dart
+│   ├── admin_model.dart
+│   └── user_model.dart
 ├── services/
-│   ├── api_service.dart
-│   └── admin_service.dart
-└── ...
+│   ├── admin_service.dart
+│   └── api_service.dart
+├── theme/
+│   └── app_theme.dart
+├── widgets/
+│   └── app_button.dart
+├── firebase_options.dart
+└── main.dart
 ```
