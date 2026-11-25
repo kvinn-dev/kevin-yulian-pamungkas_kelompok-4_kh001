@@ -1,57 +1,85 @@
 
 import 'package:flutter/material.dart';
-import 'kartu_mahasiswa.dart';
+import 'constants/colors.dart';
+import 'theme/app_theme.dart';
+import 'widgets/app_button.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Kartu Mahasiswa',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Data Mahasiswa',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: Colors.green.shade500,
-        ),
+      theme: AppTheme.light,
+      home: const HomePage(),
+    );
+  }
+}
 
-        // BACKGROUND PASTEL
-        // backgroundColor: const Color(0xFFF8F9F8),
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/background.jpeg',
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Demo Aplikasi Kevin'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Kevin Yulian Pamungkas',
+              style: TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              fit: BoxFit.cover,
             ),
-          ),
-          child: const Center(
-            child: KartuMahasiswa(
-              nama: 'Kevin Yulian Pamungkas',
-              nim: '20240801273',
-              programStudi: 'Teknik Informatika',
+
+            const SizedBox(height: 12),
+
+            const Text(
+              'Tekan tombol di bawah untuk melihat akun github saya.',
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 16,
+              ),
             ),
-          ),
+
+            const SizedBox(height: 24),
+
+            // Tombol untuk membuka Github
+            AppButton(
+              label: 'Buka Github Saya',
+              icon: Icons.code,
+              url: 'https://github.com/kvinn-dev',
+            ),
+
+            const SizedBox(height: 16),
+
+            // Tombol untuk menguji aksi internal
+            AppButton(
+              label: 'Tes Tombol',
+              icon: Icons.touch_app,
+              onPressed: () {
+                debugPrint('Tombol berhasil ditekan!');
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Tombol berhasil ditekan!'),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
