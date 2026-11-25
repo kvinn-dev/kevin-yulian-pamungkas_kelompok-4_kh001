@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AppButton extends StatefulWidget {
+class AppButton extends StatelessWidget {
   final String label;
   final IconData icon;
   final String? url;
@@ -17,21 +16,16 @@ class AppButton extends StatefulWidget {
     this.onPressed,
   });
 
-  @override
-  State<AppButton> createState() => _AppButtonState();
-}
-
-class _AppButtonState extends State<AppButton> {
   Future<void> _handlePressed(BuildContext context) async {
     // Jika ada aksi internal, jalankan aksi tersebut.
-    if (widget.onPressed != null) {
-      widget.onPressed!();
+    if (onPressed != null) {
+      onPressed!();
       return;
     }
 
     // Jika ada URL, buka aplikasi eksternal.
-    if (widget.url != null) {
-      final Uri uri = Uri.parse(widget.url!);
+    if (url != null) {
+      final Uri uri = Uri.parse(url!);
 
       final bool success = await launchUrl(
         uri,
@@ -39,9 +33,8 @@ class _AppButtonState extends State<AppButton> {
       );
 
       if (!success && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Gagal membuka URL')),
-        );
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Gagal membuka URL.')));
       }
     }
   }
@@ -52,15 +45,12 @@ class _AppButtonState extends State<AppButton> {
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: () => _handlePressed(context),
-        icon: Icon(widget.icon),
-        label: Text(widget.label),
+        icon: Icon(icon),
+        label: Text(label),
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: AppColors.textPrimary,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 16,
-          ),
+          backgroundColor: AppColors.primary, // Warna latar tombol
+          foregroundColor: AppColors.textPrimary, // Warna teks tombol
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
