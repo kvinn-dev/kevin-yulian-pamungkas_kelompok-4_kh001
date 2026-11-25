@@ -1,17 +1,35 @@
-# praktikum2_kevin
+# Praktikum 4 - Pemrograman Mobile
 
-A new Flutter project.
+## Deskripsi
+Praktikum ini mengembangkan aplikasi Flutter yang terintegrasi dengan REST API menggunakan Model dan Service terpisah. Implementasi mencakup pengelolaan data User melalui operasi CRUD serta pengambilan dan penghapusan data Admin menggunakan API.
 
-## Getting Started
+## Implementasi
+- **Model User:** Mengelola data User dengan properti ID, Name, Email, dan City.
+- **User Service:** Mengimplementasikan operasi GET, POST, PUT, PATCH, dan DELETE menggunakan REST API.
+- **Model Admin:** Membuat Model Admin terpisah dengan properti ID, Name, Email, dan Department serta konversi data JSON melalui `Admin.fromJson()`.
+- **Admin Service:** Mengimplementasikan pengambilan seluruh data Admin, pengambilan Admin berdasarkan ID, dan penghapusan Admin.
+- **ID Berdasarkan NIM:** Menggunakan tiga digit terakhir NIM (273) sebagai variabel N, dengan ID User 1273 dan ID Admin 2273.
+- **Data Display:** Menampilkan daftar User dan Admin serta detail data berdasarkan ID.
+- **Data Management:** Mengimplementasikan perubahan dan penghapusan data User serta penghapusan data Admin.
 
-This project is a starting point for a Flutter application.
+## Hasil
+Aplikasi berhasil mengimplementasikan pengelolaan data User dan Admin menggunakan REST API. Data ditampilkan melalui antarmuka Flutter, termasuk daftar dan detail data berdasarkan ID, serta pengujian operasi perubahan dan penghapusan data sesuai ketentuan praktikum.
 
-A few resources to get you started if this is your first Flutter project:
+## Teknologi
+- Flutter
+- Dart
+- REST API
+- HTTP
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Struktur File
+```text
+lib/
+├── main.dart
+├── models/
+│   ├── user.dart
+│   └── admin.dart
+├── services/
+│   ├── api_service.dart
+│   └── admin_service.dart
+└── ...
+```
