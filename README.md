@@ -1,45 +1,45 @@
-# Praktikum 4 - Pemrograman Mobile
+# Praktikum Pemrograman Mobile
 
-## Deskripsi
-Praktikum ini mengembangkan aplikasi Flutter yang terintegrasi dengan REST API menggunakan Model dan Service terpisah. Implementasi mencakup pengelolaan data User melalui operasi CRUD serta pengambilan dan penghapusan data Admin menggunakan API.
+Repository ini berisi kumpulan implementasi dan hasil praktikum mata kuliah **Pemrograman Mobile** menggunakan Flutter dan Dart. Setiap praktikum dikelola melalui branch terpisah sesuai materi dan instruksi yang diberikan.
 
-## Implementasi
-- **Model User:** Mengelola data User dengan properti ID, Name, Email, dan City.
-- **User Service:** Mengimplementasikan operasi GET, POST, PUT, PATCH, dan DELETE menggunakan REST API.
-- **Model Admin:** Membuat Model Admin terpisah dengan properti ID, Name, Email, dan Department serta konversi data JSON melalui `Admin.fromJson()`.
-- **Admin Service:** Mengimplementasikan pengambilan seluruh data Admin, pengambilan Admin berdasarkan ID, dan penghapusan Admin.
-- **ID Berdasarkan NIM:** Menggunakan tiga digit terakhir NIM (273) sebagai variabel N, dengan ID User 1273 dan ID Admin 2273.
-- **Data Display:** Menampilkan daftar User dan Admin serta detail data berdasarkan ID.
-- **Data Management:** Mengimplementasikan perubahan dan penghapusan data User serta penghapusan data Admin.
+## Identitas Mahasiswa
 
-## Hasil
-Aplikasi berhasil mengimplementasikan pengelolaan data User dan Admin menggunakan REST API. Data ditampilkan melalui antarmuka Flutter, termasuk daftar dan detail data berdasarkan ID, serta pengujian operasi perubahan dan penghapusan data sesuai ketentuan praktikum.
+| Informasi | Keterangan |
+|---|---|
+| Nama | Kevin Yulian Pamungkas |
+| NIM | 20240801273 |
+| Mata Kuliah | Pemrograman Mobile |
+| Kelas | KH001 |
+| Program Studi | Teknik Informatika |
+| Universitas | Universitas Esa Unggul |
+
+## Daftar Praktikum
+
+| Branch | Deskripsi |
+|---|---|
+| `praktikum1` | Implementasi dasar layout Android dan widget kartu mahasiswa menggunakan Flutter. |
+| `praktikum2` | Implementasi tema aplikasi, reusable button, dan komponen pendukung. |
+| `praktikum3` | Implementasi form input dan penyimpanan data menggunakan Firebase Firestore. |
+| `praktikum4` | Implementasi Model User dan Admin serta operasi REST API. |
 
 ## Teknologi
+
 - Flutter
 - Dart
+- Firebase / Cloud Firestore
 - REST API
-- HTTP
+- Git & GitHub
 
-## Struktur File
+## Struktur Branch
+
 ```text
-lib/
-├── constants/
-│   └── colors.dart
-├── l10n/
-│   ├── app_en.arb
-│   ├── app_id.arb
-│   └── ...
-├── models/
-│   ├── admin_model.dart
-│   └── user_model.dart
-├── services/
-│   ├── admin_service.dart
-│   └── api_service.dart
-├── theme/
-│   └── app_theme.dart
-├── widgets/
-│   └── app_button.dart
-├── firebase_options.dart
-└── main.dart
+main
+├── praktikum1
+├── praktikum2
+├── praktikum3
+└── praktikum4
 ```
+
+## Tujuan Repository
+
+Repository ini berfungsi sebagai dokumentasi dan arsip hasil pembelajaran praktikum Pemrograman Mobile, mencakup implementasi konsep, pengembangan aplikasi, integrasi layanan, serta pengelolaan kode menggunakan Git.
