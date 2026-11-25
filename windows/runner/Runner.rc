@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "praktikum2_kevin" "\0"
+            VALUE "FileDescription", "pemmob_kevin" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "praktikum2_kevin" "\0"
+            VALUE "InternalName", "pemmob_kevin" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "praktikum2_kevin.exe" "\0"
-            VALUE "ProductName", "praktikum2_kevin" "\0"
+            VALUE "OriginalFilename", "pemmob_kevin.exe" "\0"
+            VALUE "ProductName", "pemmob_kevin" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
