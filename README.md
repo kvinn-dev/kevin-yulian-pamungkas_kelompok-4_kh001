@@ -1,17 +1,37 @@
-# praktikum2_kevin
+# Praktikum 5 - Pemrograman Mobile
 
-A new Flutter project.
+## Deskripsi
+Praktikum ini mengimplementasikan form input data mahasiswa menggunakan Flutter yang terintegrasi dengan Firebase Cloud Firestore. Aplikasi memungkinkan pengguna mengisi data mahasiswa dan keterangan kehadiran, kemudian menyimpan data tersebut ke database Firestore.
 
-## Getting Started
+## Implementasi
+- **Firebase Integration:** Menghubungkan aplikasi Flutter dengan Firebase menggunakan Firebase Core.
+- **Firestore Database:** Menyimpan data input mahasiswa ke koleksi `praktikum`.
+- **Form Input:** Menyediakan field Nama, NIM, Lokasi, dan Mata Kuliah.
+- **Dropdown Kehadiran:** Memilih status kehadiran berupa Hadir, Izin, atau Sakit.
+- **Form Validation:** Memastikan seluruh field wajib diisi sebelum data disimpan.
+- **Loading State:** Menampilkan indikator proses saat penyimpanan data berlangsung.
+- **Feedback:** Menampilkan Snackbar ketika data berhasil disimpan atau terjadi kegagalan.
+- **Data Reset:** Mengosongkan form setelah data berhasil disimpan.
 
-This project is a starting point for a Flutter application.
+## Hasil
+Aplikasi berhasil mengimplementasikan form input data praktikum yang terhubung dengan Firebase Cloud Firestore. Data yang dimasukkan dapat disimpan ke koleksi `praktikum` dan ditampilkan pada Firebase Console.
 
-A few resources to get you started if this is your first Flutter project:
+## Teknologi
+- Flutter
+- Dart
+- Firebase Core
+- Cloud Firestore
+- Material Design
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Struktur File
+```text
+lib/
+├── main.dart
+├── firebase_options.dart
+├── constants/
+│   └── colors.dart
+├── theme/
+│   └── app_theme.dart
+└── widgets/
+    └── app_button.dart
+```
